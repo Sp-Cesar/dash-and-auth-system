@@ -5,6 +5,7 @@ const loginController = require('../controllers/loginController');
 
 function cheackAuth(req, res, next){
     if(req.session.loggedin){
+
         next();
     }else{
         res.redirect('/');
@@ -31,6 +32,13 @@ route.get('/dash',cheackAuth, (req, res)=>{
         });
     
 }); 
+
+route.get('/productos', cheackAuth ,(req, res)=>{
+    res.render('dash/products',{
+            name:req.session.nombre //ULTIMO 
+        })
+}); 
+
 route.get('/logout', (req, res)=>{
     req.session.destroy(()=>{
         res.redirect('/');
