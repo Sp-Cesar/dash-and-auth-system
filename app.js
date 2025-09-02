@@ -18,12 +18,16 @@ app.use((req, res, next) => {
   next();
 });
 
+// Middleware para archivos estáticos (CSS, imágenes, JS)
+app.use(express.static('public'));
+
 //seteamos urlencode -> capturar el formulario
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 //Usar a las rutas
 app.use('/', require('./routes/dashRoutes'))
+app.use('/', require('./routes/crudRoutes'))
 //Invoca Template
 app.set('view engine', 'ejs');
 

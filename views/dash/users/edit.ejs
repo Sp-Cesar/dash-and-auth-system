@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Login | Rocket</title>
+  </head>
+  <body>
+    <%- include("../../partials/header") %>
+
+    <div class="container">
+      <br>
+      <h1>Editar usuario</h1>
+      <br>
+      <% if(user) { %>
+      <form action="/update" method="POST">
+        <input id="id" name="id" value="<%= user.id %>" hidden>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" value="<%= user.nombre %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="user" class="form-label">Nombre de usuario</label>
+          <input type="text" class="form-control" id="user" name="user" value="<%= user.user %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="rol" class="form-label">Rol</label>
+          <select class="form-select" id="rol" name="rol" required>
+            <option selected>Seleccione el rol</option>
+            <option <%= user.rol == 'administrador' ? "selected":'' %> value="administrador">admininistrador</option>
+            <option <%= user.rol == 'supervisor' ? "selected":'' %> value="supervisor">supervisor</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Seguro que quiere actualizar a este usuario ?')">Actualizar usuario</button>
+        <a href="/usuarios" type="submit" class="btn btn-danger">Cancelar</a>
+      </form>
+      <% } %>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
